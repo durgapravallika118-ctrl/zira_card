@@ -4,124 +4,220 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zira Lights - Digital Card</title>
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-        body { background-color: #0b0b0b; color: #ffffff; display: flex; justify-content: center; min-height: 100vh; padding: 0; }
+        body { background-color: #0f1115; color: #333333; display: flex; justify-content: center; min-height: 100vh; padding: 0; }
+        
+        /* Main Mobile Container */
+        .card-wrapper { background: #ffffff; max-width: 440px; width: 100%; min-height: 100vh; position: relative; box-shadow: 0 0 25px rgba(0,0,0,0.5); overflow: hidden; padding-bottom: 30px; }
 
-        /* Card Frame Container */
-        .card-container { background-color: #161616; max-width: 420px; width: 100%; min-height: 100vh; position: relative; padding: 30px 20px 80px 20px; border-left: 1px solid #222; border-right: 1px solid #222; }
+        /* Blue-to-Red Gradient Banner (Image 1 Header) */
+        .header-banner { background: linear-gradient(135deg, #0077b6 0%, #000000 50%, #b7094c 100%); padding: 45px 20px 30px; text-align: center; color: #ffffff; position: relative; }
+        .logo-circle { width: 95px; height: 95px; border-radius: 50%; background: #2b2b2b; border: 3px solid rgba(255,255,255,0.2); margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: bold; color: #d4af37; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .brand-title { font-size: 26px; font-weight: 800; letter-spacing: 0.5px; margin-bottom: 8px; text-transform: uppercase; }
+        .tagline-pill { display: inline-block; border: 1px solid rgba(255, 255, 255, 0.4); padding: 5px 16px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #ffffff; }
 
-        /* Brand Header */
-        .header-section { text-align: center; margin-bottom: 25px; }
-        .logo-circle { width: 90px; height: 90px; border-radius: 50%; border: 2px solid #d4af37; background: #000; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px auto; font-size: 26px; font-weight: bold; color: #d4af37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
-        .brand-title { font-size: 24px; font-weight: 800; letter-spacing: 1.5px; color: #ffffff; margin-bottom: 6px; }
-        .brand-subtitle { color: #d4af37; font-size: 13px; font-weight: 600; margin-bottom: 4px; }
-        .brand-tagline { color: #888888; font-size: 11px; }
+        /* Social Icon Quick Links Bar (7 Icons Row) */
+        .social-bar { display: flex; justify-content: space-between; align-items: center; padding: 18px 20px; border-bottom: 1px solid #eef0f2; background: #ffffff; }
+        .social-btn { width: 42px; height: 42px; border-radius: 50%; border: 1px solid #e5e7eb; background: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 18px; text-decoration: none; box-shadow: 0 2px 5px rgba(0,0,0,0.03); }
+        .social-btn.wa { color: #25D366; }
+        .social-btn.insta { color: #E1306C; }
+        .social-btn.fb { color: #1877F2; }
+        .social-btn.x { color: #000000; }
+        .social-btn.yt { color: #FF0000; }
+        .social-btn.map { color: #EA4335; }
+        .social-btn.store { color: #a855f7; }
 
-        /* Primary Call-to-Action Buttons */
-        .cta-group { display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px; }
-        .cta-btn { width: 100%; padding: 14px; border-radius: 10px; font-size: 14px; font-weight: 700; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; border: none; cursor: pointer; }
-        .btn-call { background: #ffffff; color: #000000; }
-        .btn-whatsapp { background: #25d366; color: #ffffff; }
-        .btn-pdf { background: #e53935; color: #ffffff; }
-        .btn-save { background: #d4af37; color: #000000; font-size: 15px; margin-top: 15px; }
+        /* Action Buttons Area */
+        .action-area { padding: 20px; }
+        .btn-main { width: 100%; padding: 15px; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; border: none; transition: opacity 0.2s; }
+        .btn-orange { background: #ff5000; color: #ffffff; margin-bottom: 12px; box-shadow: 0 4px 12px rgba(255, 80, 0, 0.25); }
+        .btn-row { display: flex; gap: 12px; }
+        .btn-green { background: #00c853; color: #ffffff; flex: 1; font-size: 15px; }
+        .btn-outline { background: #ffffff; color: #2563eb; border: 2px solid #2563eb; flex: 1; font-size: 15px; }
 
-        /* Category Header Titles */
-        .section-title { color: #d4af37; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; margin-top: 20px; }
+        /* Products Grid Section */
+        .products-section { padding: 10px 20px 20px; }
+        .section-title { color: #d4af37; font-size: 12px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin: 15px 0 10px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .product-card { background: #1a1a1a; color: #fff; padding: 14px; border-radius: 10px; border: 1px solid #2d2d2d; }
+        .product-card h4 { font-size: 14px; font-weight: 700; color: #ffffff; margin-bottom: 4px; }
+        .product-card p { font-size: 11px; color: #aaaaaa; }
 
-        /* Two-Column Grid Cards */
-        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .grid-card { background: #222222; border-radius: 10px; padding: 14px; border: 1px solid #2a2a2a; }
-        .grid-card-title { font-size: 13px; font-weight: 700; color: #ffffff; margin-bottom: 4px; }
-        .grid-card-sub { font-size: 11px; color: #aaaaaa; }
-
-        /* Sticky Bottom Navigation Bar */
-        .bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); max-width: 420px; width: 100%; background: #111111; border-top: 1px solid #222222; display: flex; justify-content: space-around; padding: 10px 0; z-index: 100; }
-        .nav-item { color: #888888; text-decoration: none; font-size: 10px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
-        .nav-item i { font-size: 16px; }
-        .nav-item.active { color: #d4af37; }
+        /* Slide-up Contact Exchange Modal (Image 2 Style) */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 1000; align-items: flex-end; justify-content: center; }
+        .modal-card { background: #ffffff; border-radius: 20px 20px 0 0; width: 100%; max-width: 440px; padding: 25px 20px; box-shadow: 0 -5px 25px rgba(0,0,0,0.3); animation: slideUp 0.3s ease-out; }
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        
+        .modal-handle { width: 45px; height: 5px; background: #e0e0e0; border-radius: 3px; margin: 0 auto 18px; }
+        .modal-title { font-size: 20px; font-weight: 800; color: #111827; margin-bottom: 6px; }
+        .modal-sub { font-size: 13px; color: #4b5563; line-height: 1.4; margin-bottom: 20px; }
+        
+        .form-group { margin-bottom: 16px; text-align: left; }
+        .form-label { display: block; font-size: 13px; font-weight: 700; color: #1f2937; margin-bottom: 6px; }
+        .form-label span { color: #ef4444; }
+        .form-label small { font-weight: 400; color: #6b7280; }
+        
+        .form-input { width: 100%; padding: 13px 15px; border: 1px solid #d1d5db; border-radius: 10px; font-size: 15px; outline: none; background: #fff; color: #111; }
+        .form-input:focus { border-color: #4f46e5; }
+        
+        .phone-group { display: flex; gap: 10px; }
+        .country-select { width: 110px; padding: 13px 10px; border: 1px solid #d1d5db; border-radius: 10px; font-size: 14px; background: #ffffff; color: #111; font-weight: 600; outline: none; }
+        
+        .btn-note { display: inline-flex; align-items: center; gap: 8px; background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; padding: 8px 14px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; margin-bottom: 20px; }
+        .note-textarea { display: none; margin-bottom: 15px; }
+        
+        .btn-continue { width: 100%; padding: 15px; background: #4338ca; color: #ffffff; border: none; border-radius: 12px; font-weight: 700; font-size: 16px; cursor: pointer; margin-bottom: 10px; }
+        .btn-notnow { width: 100%; padding: 14px; background: #ffffff; color: #111827; border: 1px solid #e5e7eb; border-radius: 12px; font-weight: 700; font-size: 15px; cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <div class="card-container">
-        <!-- Header -->
-        <div class="header-section">
+    <div class="card-wrapper">
+        
+        <!-- Header Banner -->
+        <div class="header-banner">
             <div class="logo-circle">ZL</div>
-            <h1 class="brand-title">ZIRA LIGHTS</h1>
-            <div class="brand-subtitle">Handcrafted | Customisable Lights</div>
-            <div class="brand-tagline">Your Vision, Our Lights!</div>
+            <h1 class="brand-title">Zira lights</h1>
+            <div class="tagline-pill">YOUR VISION, OUR LIGHTS!</div>
+        </div>
+
+        <!-- 7 Icon Social Bar -->
+        <div class="social-bar">
+            <a href="https://wa.me/919945415076" class="social-btn wa" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://instagram.com" class="social-btn insta" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://facebook.com" class="social-btn fb" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://x.com" class="social-btn x" title="X"><i class="fab fa-x-twitter"></i></a>
+            <a href="https://youtube.com" class="social-btn yt" title="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="https://maps.google.com" class="social-btn map" title="Location"><i class="fas fa-location-dot"></i></a>
+            <a href="#" class="social-btn store" title="Store"><i class="fas fa-store"></i></a>
         </div>
 
         <!-- Main Action Buttons -->
-        <div class="cta-group">
-            <a href="tel:+919945415076" class="cta-btn btn-call">
-                <i class="fas fa-phone-alt" style="color: #e53935;"></i> Call Us (+91 9945415076)
-            </a>
-            <a href="https://wa.me/919945415076" class="cta-btn btn-whatsapp">
-                <i class="fab fa-whatsapp"></i> Chat on WhatsApp
-            </a>
-            <a href="#" class="cta-btn btn-pdf">
-                <i class="fas fa-file-pdf"></i> View PDF Catalogue
-            </a>
-        </div>
-
-        <!-- Section 1: Featured Models -->
-        <div class="section-title">FEATURED MODELS</div>
-        <div class="grid-container">
-            <div class="grid-card">
-                <div class="grid-card-title">ITAGLOW</div>
-                <div class="grid-card-sub">Raw Silk | Fabric</div>
-            </div>
-            <div class="grid-card">
-                <div class="grid-card-title">ELYSRIA</div>
-                <div class="grid-card-sub">Cane | Fabric</div>
-            </div>
-            <div class="grid-card">
-                <div class="grid-card-title">SOLINA</div>
-                <div class="grid-card-sub">Rattan</div>
-            </div>
-            <div class="grid-card">
-                <div class="grid-card-title">RIPPLE GLOW</div>
-                <div class="grid-card-sub">Fabric | Iron</div>
+        <div class="action-area">
+            <button class="btn-main btn-orange" onclick="openModal()">
+                Exchange Contact
+            </button>
+            <div class="btn-row">
+                <a href="tel:+919945415076" class="btn-main btn-green">
+                    <i class="fas fa-phone-alt"></i> Call Office
+                </a>
+                <a href="contact.vcf" download class="btn-main btn-outline">
+                    <i class="fas fa-download"></i> Save Contact
+                </a>
             </div>
         </div>
 
-        <!-- Section 2: Specialty Collections -->
-        <div class="section-title">SPECIALTY COLLECTIONS</div>
-        <div class="grid-container">
-            <div class="grid-card">
-                <div class="grid-card-title">Profile Lights</div>
-                <div class="grid-card-sub">Fully Customisable</div>
+        <!-- Products List -->
+        <div class="products-section">
+            <div class="section-title">FEATURED MODELS</div>
+            <div class="grid-2">
+                <div class="product-card">
+                    <h4>ITAGLOW</h4>
+                    <p>Raw Silk | Fabric</p>
+                </div>
+                <div class="product-card">
+                    <h4>ELYSRIA</h4>
+                    <p>Cane | Fabric</p>
+                </div>
+                <div class="product-card">
+                    <h4>SOLINA</h4>
+                    <p>Rattan</p>
+                </div>
+                <div class="product-card">
+                    <h4>RIPPLE GLOW</h4>
+                    <p>Fabric | Iron</p>
+                </div>
             </div>
-            <div class="grid-card">
-                <div class="grid-card-title">Acoustic Lights</div>
-                <div class="grid-card-sub">Sound Absorbing</div>
+
+            <div class="section-title">SPECIALTY COLLECTIONS</div>
+            <div class="grid-2">
+                <div class="product-card">
+                    <h4>Profile Lights</h4>
+                    <p>Fully Customisable</p>
+                </div>
+                <div class="product-card">
+                    <h4>Acoustic Lights</h4>
+                    <p>Sound Absorbing</p>
+                </div>
             </div>
         </div>
 
-        <!-- Save Contact Button -->
-        <a href="contact.vcf" download class="cta-btn btn-save">
-            <i class="fas fa-download"></i> Save Contact to Phone
-        </a>
     </div>
 
-    <!-- Bottom Action Bar -->
-    <div class="bottom-nav">
-        <a href="tel:+919945415076" class="nav-item active">
-            <i class="fas fa-phone"></i> Call
-        </a>
-        <a href="https://wa.me/919945415076" class="nav-item">
-            <i class="fab fa-whatsapp"></i> WhatsApp
-        </a>
-        <a href="mailto:ziralights@gmail.com" class="nav-item">
-            <i class="fas fa-envelope"></i> Email
-        </a>
-        <a href="https://maps.google.com" class="nav-item">
-            <i class="fas fa-location-dot"></i> Location
-        </a>
+    <!-- Exchange Contact Modal Popup (Image 2 Replica) -->
+    <div class="modal-overlay" id="contactModal">
+        <div class="modal-card">
+            <div class="modal-handle"></div>
+            <h2 class="modal-title">Share your contact</h2>
+            <p class="modal-sub">Enter your phone number (required) and we'll save this card to your contacts.</p>
+            
+            <form id="exchangeForm" onsubmit="handleFormSubmit(event)">
+                <div class="form-group">
+                    <label class="form-label">Your name <span>*</span></label>
+                    <input type="text" class="form-input" placeholder="Full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Phone <span>*</span></label>
+                    <div class="phone-group">
+                        <select class="country-select">
+                            <option value="+91">IN +91</option>
+                            <option value="+1">US +1</option>
+                            <option value="+44">UK +44</option>
+                            <option value="+971">UAE +971</option>
+                        </select>
+                        <input type="tel" class="form-input" placeholder="Phone number" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Email <small>(optional)</small></label>
+                    <input type="email" class="form-input" placeholder="you@example.com">
+                </div>
+
+                <button type="button" class="btn-note" onclick="toggleNote()">
+                    <i class="far fa-file-alt"></i> Add a note
+                </button>
+                <div class="note-textarea" id="noteArea">
+                    <textarea class="form-input" rows="3" placeholder="Write your message or request..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn-continue">Continue</button>
+                <button type="button" class="btn-notnow" onclick="closeModal()">Not now</button>
+            </form>
+        </div>
     </div>
 
+    <script>
+        function openModal() {
+            document.getElementById('contactModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('contactModal').style.display = 'none';
+        }
+
+        function toggleNote() {
+            const area = document.getElementById('noteArea');
+            area.style.display = area.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            alert('Thank you! Contact details submitted.');
+            closeModal();
+        }
+
+        // Close modal when clicking background overlay
+        window.onclick = function(event) {
+            const modal = document.getElementById('contactModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
 </body>
 </html>
