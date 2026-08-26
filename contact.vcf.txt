@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Zira Lights;;;;
+FN:Zira Lights
+ORG:Zira Lights
+TITLE:Handcrafted & Customisable Lighting Products
+TEL;TYPE=CELL,VOICE:+919945415076
+EMAIL;TYPE=INTERNET:ziralights@gmail.com
+URL;TYPE=Website:https://drive.google.com/file/d/1KBPgpoASB0pUQxEhx0TaAHFWBzKfvkhK/view?usp=drivesdk
+NOTE:Handcrafted & Customisable Architectural, Profile & Acoustic Lights.
+END:VCARD

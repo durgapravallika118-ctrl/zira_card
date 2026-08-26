@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zira Lights - Smart Business Card</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        body { background-color: #0d0d0d; color: #ffffff; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 15px; }
+        .card { background: #161616; max-width: 400px; width: 100%; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.6); overflow: hidden; border: 1px solid #2a2a2a; text-align: center; }
+        .header { background: linear-gradient(180deg, #1f1f1f 0%, #161616 100%); padding: 35px 20px 20px; border-bottom: 1px solid #2a2a2a; }
+        .logo-circle { width: 80px; height: 80px; border-radius: 50%; background: #222; border: 2px solid #d4af37; color: #d4af37; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: bold; margin: 0 auto 15px; }
+        .brand-name { font-size: 22px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: #fff; }
+        .tagline { font-size: 13px; color: #d4af37; margin-top: 5px; font-weight: 500; }
+        .subtext { font-size: 11px; color: #888; margin-top: 3px; }
+        .body { padding: 20px; }
+        .btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.2s ease; }
+        .btn-call { background-color: #ffffff; color: #000000; }
+        .btn-wa { background-color: #25d366; color: #ffffff; }
+        .btn-pdf { background-color: #e63946; color: #ffffff; }
+        .btn-vcf { background-color: #d4af37; color: #000000; font-weight: 700; margin-top: 15px; }
+        .section-title { font-size: 13px; font-weight: 700; color: #d4af37; text-transform: uppercase; letter-spacing: 1px; margin: 20px 0 10px; text-align: left; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; text-align: left; }
+        .product-card { background: #202020; padding: 10px; border-radius: 8px; border: 1px solid #2c2c2c; }
+        .product-card h4 { font-size: 13px; color: #fff; }
+        .product-card p { font-size: 10px; color: #aaa; margin-top: 2px; }
+        .footer { font-size: 11px; color: #666; margin-top: 20px; padding-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="header">
+            <div class="logo-circle">ZL</div>
+            <div class="brand-name">ZIRA LIGHTS</div>
+            <div class="tagline">Handcrafted | Customisable Lights</div>
+            <div class="subtext">Your Vision, Our Lights!</div>
+        </div>
+        <div class="body">
+            <!-- Quick Action Buttons -->
+            <a href="tel:+919945415076" class="btn btn-call">📞 Call Us (+91 9945415076)</a>
+            <a href="https://wa.me/919945415076?text=Hi%20Zira%20Lights,%20I%20am%20interested%20in%20your%20customisable%20lighting%20catalogue." class="btn btn-wa">💬 Chat on WhatsApp</a>
+            <a href="https://drive.google.com/file/d/1KBPgpoASB0pUQxEhx0TaAHFWBzKfvkhK/view?usp=drivesdk" target="_blank" class="btn btn-pdf">📄 View PDF Catalogue</a>
+
+            <!-- Featured Product Models -->
+            <div class="section-title">Featured Models</div>
+            <div class="grid">
+                <div class="product-card">
+                    <h4>ITAGLOW</h4>
+                    <p>Raw Silk | Fabric</p>
+                </div>
+                <div class="product-card">
+                    <h4>ELYSRIA</h4>
+                    <p>Cane | Fabric</p>
+                </div>
+                <div class="product-card">
+                    <h4>SOLINA</h4>
+                    <p>Rattan</p>
+                </div>
+                <div class="product-card">
+                    <h4>RIPPLE GLOW</h4>
+                    <p>Fabric | Iron</p>
+                </div>
+            </div>
+
+            <!-- Specialty Collections -->
+            <div class="section-title">Specialty Collections</div>
+            <div class="grid">
+                <div class="product-card">
+                    <h4>Profile Lights</h4>
+                    <p>Fully Customisable</p>
+                </div>
+                <div class="product-card">
+                    <h4>Acoustic Lights</h4>
+                    <p>Sound Absorbing</p>
+                </div>
+            </div>
+
+            <!-- Save Contact Button -->
+            <a href="contact.vcf" download class="btn btn-vcf">📇 Save Contact to Phone</a>
+            <div class="footer">✉️ ziralights@gmail.com</div>
+        </div>
+    </div>
+</body>
+</html>
