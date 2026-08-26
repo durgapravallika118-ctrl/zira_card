@@ -3,82 +3,227 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zira Lights - Smart Business Card</title>
+    <title>Zira Lights - Digital Card</title>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-        body { background-color: #0d0d0d; color: #ffffff; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 15px; }
-        .card { background: #161616; max-width: 400px; width: 100%; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.6); overflow: hidden; border: 1px solid #2a2a2a; text-align: center; }
-        .header { background: linear-gradient(180deg, #1f1f1f 0%, #161616 100%); padding: 35px 20px 20px; border-bottom: 1px solid #2a2a2a; }
-        .logo-circle { width: 80px; height: 80px; border-radius: 50%; background: #222; border: 2px solid #d4af37; color: #d4af37; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: bold; margin: 0 auto 15px; }
-        .brand-name { font-size: 22px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: #fff; }
-        .tagline { font-size: 13px; color: #d4af37; margin-top: 5px; font-weight: 500; }
-        .subtext { font-size: 11px; color: #888; margin-top: 3px; }
-        .body { padding: 20px; }
-        .btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.2s ease; }
-        .btn-call { background-color: #ffffff; color: #000000; }
-        .btn-wa { background-color: #25d366; color: #ffffff; }
-        .btn-pdf { background-color: #e63946; color: #ffffff; }
-        .btn-vcf { background-color: #d4af37; color: #000000; font-weight: 700; margin-top: 15px; }
-        .section-title { font-size: 13px; font-weight: 700; color: #d4af37; text-transform: uppercase; letter-spacing: 1px; margin: 20px 0 10px; text-align: left; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; text-align: left; }
-        .product-card { background: #202020; padding: 10px; border-radius: 8px; border: 1px solid #2c2c2c; }
-        .product-card h4 { font-size: 13px; color: #fff; }
-        .product-card p { font-size: 10px; color: #aaa; margin-top: 2px; }
-        .footer { font-size: 11px; color: #666; margin-top: 20px; padding-bottom: 10px; }
+        body { background-color: #121212; color: #333333; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; padding: 0; }
+        
+        /* Container Card */
+        .card-container { background: #ffffff; max-width: 450px; width: 100%; box-shadow: 0 10px 25px rgba(0,0,0,0.3); overflow: hidden; position: relative; min-height: 100vh; }
+
+        /* Top Header Banner (Gradient Style) */
+        .header-banner { background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%); padding: 40px 20px 30px; text-align: center; color: #ffffff; position: relative; }
+        .logo-circle { width: 90px; height: 90px; border-radius: 50%; background: #161616; border: 3px solid #d4af37; color: #d4af37; display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: bold; margin: 0 auto 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.4); }
+        .brand-name { font-size: 24px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+        .tagline-pill { display: inline-block; background: rgba(212, 175, 55, 0.2); border: 1px solid #d4af37; color: #d4af37; padding: 5px 15px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Icon Quick Links */
+        .social-bar { display: flex; justify-content: center; gap: 12px; padding: 20px 10px; border-bottom: 1px solid #eeeeee; background: #fafafa; }
+        .icon-btn { width: 42px; height: 42px; border-radius: 50%; background: #ffffff; border: 1px solid #e0e0e0; display: flex; align-items: center; justify-content: center; color: #444; text-decoration: none; font-size: 18px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: all 0.2s; }
+        .icon-btn.wa { color: #25D366; }
+        .icon-btn.insta { color: #E1306C; }
+        .icon-btn.map { color: #EA4335; }
+        .icon-btn.mail { color: #0078D4; }
+
+        /* Action Buttons */
+        .action-area { padding: 15px 20px; text-align: center; }
+        .btn-main { width: 100%; padding: 14px; border-radius: 10px; border: none; font-size: 15px; font-weight: 700; cursor: pointer; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; transition: 0.2s; }
+        .btn-orange { background: #ff5722; color: #ffffff; }
+        .btn-green { background: #00c853; color: #ffffff; width: 48%; }
+        .btn-outline { background: #ffffff; color: #2196f3; border: 1 border: 2px solid #2196f3; width: 48%; }
+        .btn-row { display: flex; justify-content: space-between; gap: 10px; }
+
+        /* Accordion / Slide Categories */
+        .section-box { border-top: 1px solid #eeeeee; padding: 15px 20px; }
+        .accordion-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-size: 16px; font-weight: 700; color: #222; padding: 5px 0; }
+        
+        /* Carousel Styling */
+        .carousel-container { position: relative; margin-top: 15px; overflow: hidden; border-radius: 10px; }
+        .carousel-track { display: flex; transition: transform 0.3s ease-in-out; }
+        .slide { min-width: 100%; box-sizing: border-box; text-align: center; background: #000; height: 250px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #fff; }
+        .slide-caption { background: rgba(0,0,0,0.7); width: 100%; padding: 10px; position: absolute; bottom: 0; }
+        .nav-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.8); border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 16px; font-weight: bold; }
+        .nav-prev { left: 10px; }
+        .nav-next { right: 10px; }
+
+        /* About & Stats Section */
+        .about-section { padding: 20px; background: #fdfdfd; border-top: 1px solid #eee; }
+        .about-title { font-size: 18px; font-weight: 800; border-bottom: 2px solid #ff5722; display: inline-block; padding-bottom: 3px; margin-bottom: 12px; }
+        .about-desc { font-size: 13px; color: #666; line-height: 1.6; margin-bottom: 15px; font-style: italic; }
+        
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin: 15px 0; }
+        .stat-card { background: #fffde7; border: 1px solid #fff59d; padding: 12px 5px; border-radius: 8px; text-align: center; }
+        .stat-number { font-size: 16px; font-weight: 800; color: #d84315; }
+        .stat-label { font-size: 10px; color: #666; font-weight: 600; margin-top: 4px; }
+
+        .contact-info-list { font-size: 13px; color: #444; margin-top: 15px; display: flex; flex-direction: column; gap: 8px; }
+
+        /* Modal Popup (Image 3 Style) */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; align-items: flex-end; justify-content: center; }
+        .modal-card { background: #ffffff; border-radius: 20px 20px 0 0; width: 100%; max-width: 450px; padding: 25px 20px; box-shadow: 0 -5px 25px rgba(0,0,0,0.2); transform: translateY(100%); transition: transform 0.3s ease; }
+        .modal-overlay.active .modal-card { transform: translateY(0); }
+        .modal-handle { width: 40px; height: 4px; background: #ddd; border-radius: 2px; margin: 0 auto 15px; }
+        .modal-title { font-size: 18px; font-weight: 700; color: #111; margin-bottom: 5px; }
+        .modal-sub { font-size: 12px; color: #666; margin-bottom: 20px; }
+        
+        .form-group { margin-bottom: 15px; text-align: left; }
+        .form-group label { display: block; font-size: 12px; font-weight: 600; color: #333; margin-bottom: 5px; }
+        .form-input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; outline: none; }
+        .btn-continue { width: 100%; padding: 14px; background: #4f46e5; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 15px; cursor: pointer; margin-top: 10px; }
+        .btn-cancel { width: 100%; padding: 12px; background: transparent; color: #666; border: none; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; margin-top: 5px; }
     </style>
 </head>
 <body>
-    <div class="card">
-        <div class="header">
+
+    <div class="card-container">
+        
+        <!-- Header Banner (Image 1 Style) -->
+        <div class="header-banner">
             <div class="logo-circle">ZL</div>
             <div class="brand-name">ZIRA LIGHTS</div>
-            <div class="tagline">Handcrafted | Customisable Lights</div>
-            <div class="subtext">Your Vision, Our Lights!</div>
+            <div class="tagline-pill">Handcrafted | Customisable Lights</div>
         </div>
-        <div class="body">
-            <!-- Quick Action Buttons -->
-            <a href="tel:+919945415076" class="btn btn-call">📞 Call Us (+91 9945415076)</a>
-            <a href="https://wa.me/919945415076?text=Hi%20Zira%20Lights,%20I%20am%20interested%20in%20your%20customisable%20lighting%20catalogue." class="btn btn-wa">💬 Chat on WhatsApp</a>
-            <a href="https://drive.google.com/file/d/1KBPgpoASB0pUQxEhx0TaAHFWBzKfvkhK/view?usp=drivesdk" target="_blank" class="btn btn-pdf">📄 View PDF Catalogue</a>
 
-            <!-- Featured Product Models -->
-            <div class="section-title">Featured Models</div>
-            <div class="grid">
-                <div class="product-card">
-                    <h4>ITAGLOW</h4>
-                    <p>Raw Silk | Fabric</p>
+        <!-- Social Quick Links Bar -->
+        <div class="social-bar">
+            <a href="https://wa.me/919945415076?text=Hi%20Zira%20Lights,%20I%20am%20interested%20in%20your%20products." class="icon-btn wa" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://instagram.com" class="icon-btn insta" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://maps.google.com" class="icon-btn map" title="Location"><i class="fas fa-location-dot"></i></a>
+            <a href="mailto:ziralights@gmail.com" class="icon-btn mail" title="Email"><i class="far fa-envelope"></i></a>
+        </div>
+
+        <!-- Main Action Buttons -->
+        <div class="action-area">
+            <button class="btn-main btn-orange" onclick="openModal()">
+                <i class="fas fa-user-plus"></i> Exchange Contact
+            </button>
+            <div class="btn-row">
+                <a href="tel:+919945415076" class="btn-main btn-green"><i class="fas fa-phone"></i> Call Office</a>
+                <a href="contact.vcf" download class="btn-main btn-outline"><i class="fas fa-download"></i> Save Contact</a>
+            </div>
+        </div>
+
+        <!-- Product Showcase Slider Section (Image 4 Style) -->
+        <div class="section-box">
+            <div class="accordion-header">
+                <span>Featured Collections</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            
+            <div class="carousel-container">
+                <button class="nav-arrow nav-prev" onclick="moveSlide(-1)">&#10094;</button>
+                <div class="carousel-track" id="carouselTrack">
+                    <div class="slide" style="background-color: #1a1a1a;">
+                        <h3>ITAGLOW</h3>
+                        <p>Raw Silk | Fabric</p>
+                    </div>
+                    <div class="slide" style="background-color: #2b2b2b;">
+                        <h3>ELYSRIA</h3>
+                        <p>Cane | Fabric</p>
+                    </div>
+                    <div class="slide" style="background-color: #3b3b3b;">
+                        <h3>SOLINA</h3>
+                        <p>Rattan</p>
+                    </div>
+                    <div class="slide" style="background-color: #4b4b4b;">
+                        <h3>RIPPLE GLOW</h3>
+                        <p>Fabric | Iron</p>
+                    </div>
                 </div>
-                <div class="product-card">
-                    <h4>ELYSRIA</h4>
-                    <p>Cane | Fabric</p>
+                <button class="nav-arrow nav-next" onclick="moveSlide(1)">&#10095;</button>
+            </div>
+        </div>
+
+        <!-- About Us & Stats Section (Image 5 & 6 Style) -->
+        <div class="about-section">
+            <div class="about-title">About Us</div>
+            <p class="about-desc">
+                "Zira Lights is known for delivering high-quality custom lighting products with a strong focus on artisanal standards, consistency, and premium finishes."
+            </p>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">Years Exp.</div>
                 </div>
-                <div class="product-card">
-                    <h4>SOLINA</h4>
-                    <p>Rattan</p>
+                <div class="stat-card">
+                    <div class="stat-number">5000+</div>
+                    <div class="stat-label">Projects</div>
                 </div>
-                <div class="product-card">
-                    <h4>RIPPLE GLOW</h4>
-                    <p>Fabric | Iron</p>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Satisfaction</div>
                 </div>
             </div>
 
-            <!-- Specialty Collections -->
-            <div class="section-title">Specialty Collections</div>
-            <div class="grid">
-                <div class="product-card">
-                    <h4>Profile Lights</h4>
-                    <p>Fully Customisable</p>
-                </div>
-                <div class="product-card">
-                    <h4>Acoustic Lights</h4>
-                    <p>Sound Absorbing</p>
-                </div>
+            <!-- Detailed Contact Info List -->
+            <div class="contact-info-list">
+                <div><i class="fas fa-phone" style="color: #666; width: 20px;"></i> +91 9945415076</div>
+                <div><i class="fas fa-envelope" style="color: #666; width: 20px;"></i> ziralights@gmail.com</div>
+                <div><i class="fas fa-location-dot" style="color: #666; width: 20px;"></i> Bengaluru, Karnataka, India</div>
             </div>
+        </div>
 
-            <!-- Save Contact Button -->
-            <a href="contact.vcf" download class="btn btn-vcf">📇 Save Contact to Phone</a>
-            <div class="footer">✉️ ziralights@gmail.com</div>
+    </div>
+
+    <!-- Exchange Contact Modal (Image 3 Popup Style) -->
+    <div class="modal-overlay" id="contactModal">
+        <div class="modal-card">
+            <div class="modal-handle"></div>
+            <div class="modal-title">Share your contact</div>
+            <div class="modal-sub">Enter your phone number and details to save this card to your contacts.</div>
+            
+            <form id="exchangeForm" onsubmit="handleFormSubmit(event)">
+                <div class="form-group">
+                    <label>Your name *</label>
+                    <input type="text" class="form-input" placeholder="Full name" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone *</label>
+                    <input type="tel" class="form-input" placeholder="+91 Phone number" required>
+                </div>
+                <div class="form-group">
+                    <label>Email (optional)</label>
+                    <input type="email" class="form-input" placeholder="you@example.com">
+                </div>
+                
+                <button type="submit" class="btn-continue">Continue</button>
+                <button type="button" class="btn-cancel" onclick="closeModal()">Not now</button>
+            </form>
         </div>
     </div>
+
+    <script>
+        // Modal Controls
+        function openModal() {
+            const modal = document.getElementById('contactModal');
+            modal.style.display = 'flex';
+            setTimeout(() => modal.classList.add('active'), 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('contactModal');
+            modal.classList.remove('active');
+            setTimeout(() => modal.style.display = 'none', 300);
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            alert('Thank you! Contact details submitted successfully.');
+            closeModal();
+        }
+
+        // Carousel Controls
+        let currentSlide = 0;
+        function moveSlide(direction) {
+            const track = document.getElementById('carouselTrack');
+            const totalSlides = track.children.length;
+            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+    </script>
 </body>
 </html>
