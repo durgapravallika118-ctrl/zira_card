@@ -35,13 +35,13 @@
 
         /* Accordion Galleries */
         .accordion-section { border-top: 1px solid #eeeeee; padding: 15px 20px; }
-        .accordion-header { display: flex; justify-content: space-between; align-items: center; font-size: 18px; font-weight: 700; color: #222; cursor: pointer; padding: 5px 0; }
-        .accordion-header i { font-size: 14px; transition: transform 0.3s; }
+        .accordion-header { display: flex; justify-content: space-between; align-items: center; font-size: 18px; font-weight: 700; color: #c88d76; cursor: pointer; padding: 5px 0; }
+        .accordion-header i { font-size: 14px; transition: transform 0.3s; color: #c88d76; }
         .accordion-header.active i { transform: rotate(180deg); }
 
         .gallery-container { margin-top: 15px; display: block; }
         
-        .main-viewer { position: relative; width: 100%; height: 320px; border-radius: 14px; overflow: hidden; background: #0c0d10; display: flex; align-items: center; justify-content: center; }
+        .main-viewer { position: relative; width: 100%; height: 320px; border-radius: 14px; overflow: hidden; background: #0c0d10; display: flex; align-items: center; justify-content: center; cursor: pointer; }
         .main-viewer img { width: 100%; height: 100%; object-fit: contain; }
         
         .arrow-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; border-radius: 50%; background: rgba(255, 255, 255, 0.85); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; color: #333; box-shadow: 0 2px 6px rgba(0,0,0,0.2); z-index: 5; }
@@ -75,7 +75,7 @@
         .contact-item i { font-size: 16px; color: #c88d76; margin-top: 3px; min-width: 18px; }
         .contact-item a { color: #c88d76; text-decoration: none; word-break: break-all; }
 
-        /* Modal */
+        /* Modal Contact Exchange */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 1000; align-items: flex-end; justify-content: center; }
         .modal-card { background: #ffffff; border-radius: 20px 20px 0 0; width: 100%; max-width: 440px; padding: 25px 20px; box-shadow: 0 -5px 25px rgba(0,0,0,0.3); animation: slideUp 0.3s ease-out; }
         @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
@@ -93,6 +93,13 @@
         .note-textarea { display: none; margin-bottom: 15px; }
         .btn-continue { width: 100%; padding: 15px; background: #c88d76; color: #ffffff; border: none; border-radius: 12px; font-weight: 700; font-size: 16px; cursor: pointer; margin-bottom: 10px; }
         .btn-notnow { width: 100%; padding: 14px; background: #ffffff; color: #111827; border: 1px solid #e5e7eb; border-radius: 12px; font-weight: 700; font-size: 15px; cursor: pointer; }
+
+        /* Image Lightbox Popup Modal */
+        .lightbox-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); z-index: 2000; align-items: center; justify-content: center; flex-direction: column; }
+        .lightbox-content { position: relative; max-width: 90%; max-height: 80vh; display: flex; justify-content: center; align-items: center; }
+        .lightbox-content img { max-width: 100%; max-height: 80vh; object-fit: contain; border-radius: 8px; }
+        .lightbox-close { position: absolute; top: -40px; right: 0; color: #ffffff; font-size: 28px; cursor: pointer; }
+        .lightbox-caption { color: #ffffff; margin-top: 15px; font-size: 16px; font-weight: 700; text-transform: capitalize; }
     </style>
 </head>
 <body>
@@ -150,6 +157,7 @@
         </div>
     </div>
 
+    <!-- Contact Exchange Modal -->
     <div class="modal-overlay" id="contactModal">
         <div class="modal-card">
             <div class="modal-handle"></div>
@@ -188,6 +196,15 @@
                 <button type="button" class="btn-notnow" onclick="closeModal()">Not now</button>
             </form>
         </div>
+    </div>
+
+    <!-- Image Lightbox Popup Modal -->
+    <div class="lightbox-overlay" id="imageLightbox" onclick="closeLightbox()">
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+            <img id="lightboxImg" src="" alt="Enlarged Light Image">
+        </div>
+        <div class="lightbox-caption" id="lightboxCaption"></div>
     </div>
 
     <script>
@@ -310,11 +327,11 @@
                         <i class="fas fa-caret-down"></i>
                     </div>
                     <div id="g-sec-${gIdx}" class="gallery-container">
-                        <div class="main-viewer">
+                        <div class="main-viewer" onclick="openLightbox(${gIdx})">
                             <div class="product-label" id="label-${gIdx}">${section.images[0].name}</div>
-                            <button class="arrow-nav left" onclick="changeSlide(${gIdx}, -1)"><i class="fas fa-chevron-left"></i></button>
+                            <button class="arrow-nav left" onclick="event.stopPropagation(); changeSlide(${gIdx}, -1)"><i class="fas fa-chevron-left"></i></button>
                             <img id="mainImg-${gIdx}" src="${section.images[0].src}" alt="${section.images[0].name}">
-                            <button class="arrow-nav right" onclick="changeSlide(${gIdx}, 1)"><i class="fas fa-chevron-right"></i></button>
+                            <button class="arrow-nav right" onclick="event.stopPropagation(); changeSlide(${gIdx}, 1)"><i class="fas fa-chevron-right"></i></button>
                             <div class="dots-indicator" id="dots-${gIdx}">${dotsHtml}</div>
                         </div>
                         <div class="thumb-strip" id="thumbs-${gIdx}">${thumbsHtml}</div>
@@ -350,6 +367,18 @@
             const isVisible = el.style.display !== 'none';
             el.style.display = isVisible ? 'none' : 'block';
             headerEl.classList.toggle('active', !isVisible);
+        }
+
+        function openLightbox(gIdx) {
+            const activeIdx = activeIndices[gIdx];
+            const item = galleryData[gIdx].images[activeIdx];
+            document.getElementById('lightboxImg').src = item.src;
+            document.getElementById('lightboxCaption').innerText = item.name;
+            document.getElementById('imageLightbox').style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('imageLightbox').style.display = 'none';
         }
 
         renderGalleries();
