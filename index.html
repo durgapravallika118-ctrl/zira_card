@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zira Lights - Digital Card</title>
-    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
@@ -15,7 +14,6 @@
         /* Header Banner - Clean Light Theme */
         .header-banner { background: #ffffff; padding: 20px 15px 20px; text-align: center; color: #111111; position: relative; border-bottom: 1px solid #eef0f2; }
         
-        /* Updated: Full width logo container with direct scaling */
         .logo-container { width: 100%; max-width: 100%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; }
         .logo-container img { width: 90%; max-width: 400px; height: auto; object-fit: contain; display: block; margin: 0 auto; }
         
@@ -102,7 +100,6 @@
 <body>
 
     <div class="card-wrapper">
-        <!-- Header Banner -->
         <div class="header-banner">
             <div class="logo-container">
                 <img src="WhatsApp Image 2026-08-27 at 12.22.26 PM.jpeg" alt="Zira Lights Logo">
@@ -110,14 +107,12 @@
             <div class="tagline-pill">Lighting Solutions | Custom Manufacturing</div>
         </div>
 
-        <!-- Social Bar -->
         <div class="social-bar">
             <a href="https://wa.me/919945625101" class="social-btn wa"><i class="fab fa-whatsapp"></i></a>
             <a href="https://share.google/yqGMPEw3OthX3fW0I" class="social-btn insta" target="_blank"><i class="fab fa-instagram"></i></a>
             <a href="https://maps.google.com/?q=Devatha+Plaza,+Residency+Rd,+opp.+to+Bishop+Cotton+Boys+School,+Shanthala+Nagar,+Ashok+Nagar,+Bengaluru,+Karnataka+560025" class="social-btn map" target="_blank"><i class="fas fa-location-dot"></i></a>
         </div>
 
-        <!-- Action Buttons -->
         <div class="action-area">
             <button class="btn-main btn-orange" onclick="openModal()">Exchange Contact</button>
             <div class="btn-row">
@@ -126,10 +121,8 @@
             </div>
         </div>
 
-        <!-- Dynamic Galleries -->
         <div id="galleries-root"></div>
 
-        <!-- About Us Section -->
         <div class="about-us-section">
             <h3 class="section-title">About Us</h3>
             <p class="about-text">
@@ -137,14 +130,12 @@
             </p>
         </div>
 
-        <!-- Inquires Button Section -->
         <div class="inquires-btn-container">
             <a href="https://wa.me/919945625101" class="btn-inquire">
                 <i class="far fa-comment-dots"></i> Inquires
             </a>
         </div>
 
-        <!-- Contact Footer -->
         <div class="contact-details">
             <div class="contact-item">
                 <i class="fas fa-phone-alt"></i>
@@ -161,7 +152,6 @@
         </div>
     </div>
 
-    <!-- Contact Exchange Modal -->
     <div class="modal-overlay" id="contactModal">
         <div class="modal-card">
             <div class="modal-handle"></div>
@@ -187,155 +177,4 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Email <small>(optional)</small></label>
-                    <input type="email" class="form-input" placeholder="you@example.com">
-                </div>
-
-                <button type="button" class="btn-note" onclick="toggleNote()"><i class="far fa-file-alt"></i> Add a note</button>
-                <div class="note-textarea" id="noteArea">
-                    <textarea class="form-input" rows="3" placeholder="Write your message or request..."></textarea>
-                </div>
-                
-                <button type="submit" class="btn-continue">Continue</button>
-                <button type="button" class="btn-notnow" onclick="closeModal()">Not now</button>
-            </form>
-        </div>
-    </div>
-
-    <script>
-        const galleryData = [
-            {
-                title: "Customized Lights",
-                images: [
-                    { name: "CUSTOMIZE 1", src: "customize1.jpg.png" },
-                    { name: "CUSTOMIZE 2", src: "customize2.jpg.png" },
-                    { name: "CUSTOMIZE 3", src: "customize3.jpg.png" },
-                    { name: "CUSTOMIZE 4", src: "customize4.jpg.png" },
-                    { name: "CUSTOMIZE 5", src: "customize5.jpg.png" }
-                ]
-            },
-            {
-                title: "Profile Lights",
-                images: [
-                    { name: "PROFILE 1", src: "profile1.jpg.png" },
-                    { name: "PROFILE 2", src: "profile2.jpg.png" },
-                    { name: "PROFILE 3", src: "profile3.jpg.png" },
-                    { name: "PROFILE 4", src: "profile4.jpg.png" },
-                    { name: "PROFILE 5", src: "profile5.jpg.png" }
-                ]
-            },
-            {
-                title: "Pendant & Floor Lights",
-                images: [
-                    { name: "ITAGLOW", src: "itaglow.jpg.png" },
-                    { name: "ELYSRA", src: "elysra.jpg.png" },
-                    { name: "DROOP", src: "droop.jpg.png" },
-                    { name: "KINS", src: "kins.jpg.png" },
-                    { name: "RIPPLE GLOW", src: "rippleglow.jpg.png" },
-                    { name: "CIRCA", src: "circa.jpg.png" },
-                    { name: "EATHEN", src: "eathen.jpg.png" },
-                    { name: "EVELORA", src: "evelora.jpg.png" }
-                ]
-            },
-            {
-                title: "Designer Collections",
-                images: [
-                    { name: "BLOOM", src: "bloom.jpg.png" },
-                    { name: "TOTORA", src: "totora.jpg.png" },
-                    { name: "SWAY", src: "sway.jpg.png" },
-                    { name: "PINCH", src: "pinch.png" },
-                    { name: "GEO", src: "geo.jpg.png" },
-                    { name: "INVERTO", src: "inverto.jpg.png" }
-                ]
-            }
-        ];
-
-        const activeIndices = {};
-
-        function renderGalleries() {
-            const root = document.getElementById('galleries-root');
-            root.innerHTML = '';
-
-            galleryData.forEach((section, gIdx) => {
-                activeIndices[gIdx] = 0;
-                
-                const sectionDiv = document.createElement('div');
-                sectionDiv.className = 'accordion-section';
-                
-                let thumbsHtml = '';
-                let dotsHtml = '';
-                
-                section.images.forEach((img, iIdx) => {
-                    thumbsHtml += `<div class="thumb-item ${iIdx === 0 ? 'active' : ''}" onclick="setSlide(${gIdx}, ${iIdx})"><img src="${img.src}" alt="${img.name}"></div>`;
-                    dotsHtml += `<div class="dot ${iIdx === 0 ? 'active' : ''}"></div>`;
-                });
-
-                sectionDiv.innerHTML = `
-                    <div class="accordion-header active" onclick="toggleAccordion('g-sec-${gIdx}', this)">
-                        <span>${section.title}</span>
-                        <i class="fas fa-caret-down"></i>
-                    </div>
-                    <div id="g-sec-${gIdx}" class="gallery-container">
-                        <div class="main-viewer">
-                            <div class="product-label" id="label-${gIdx}">${section.images[0].name}</div>
-                            <button class="arrow-nav left" onclick="changeSlide(${gIdx}, -1)"><i class="fas fa-chevron-left"></i></button>
-                            <img id="mainImg-${gIdx}" src="${section.images[0].src}" alt="${section.images[0].name}">
-                            <button class="arrow-nav right" onclick="changeSlide(${gIdx}, 1)"><i class="fas fa-chevron-right"></i></button>
-                            <div class="dots-indicator" id="dots-${gIdx}">${dotsHtml}</div>
-                        </div>
-                        <div class="thumb-strip" id="thumbs-${gIdx}">${thumbsHtml}</div>
-                    </div>
-                `;
-                root.appendChild(sectionDiv);
-            });
-        }
-
-        function setSlide(gIdx, iIdx) {
-            activeIndices[gIdx] = iIdx;
-            const item = galleryData[gIdx].images[iIdx];
-            document.getElementById(`mainImg-${gIdx}`).src = item.src;
-            document.getElementById(`label-${gIdx}`).innerText = item.name;
-
-            const thumbs = document.querySelectorAll(`#thumbs-${gIdx} .thumb-item`);
-            thumbs.forEach((t, i) => t.classList.toggle('active', i === iIdx));
-
-            const dots = document.querySelectorAll(`#dots-${gIdx} .dot`);
-            dots.forEach((d, i) => d.classList.toggle('active', i === iIdx));
-        }
-
-        function changeSlide(gIdx, dir) {
-            let total = galleryData[gIdx].images.length;
-            let next = activeIndices[gIdx] + dir;
-            if (next < 0) next = total - 1;
-            if (next >= total) next = 0;
-            setSlide(gIdx, next);
-        }
-
-        function toggleAccordion(id, headerEl) {
-            const el = document.getElementById(id);
-            const isVisible = el.style.display !== 'none';
-            el.style.display = isVisible ? 'none' : 'block';
-            headerEl.classList.toggle('active', !isVisible);
-        }
-
-        renderGalleries();
-
-        function openModal() { document.getElementById('contactModal').style.display = 'flex'; }
-        function closeModal() { document.getElementById('contactModal').style.display = 'none'; }
-        function toggleNote() {
-            const area = document.getElementById('noteArea');
-            area.style.display = area.style.display === 'block' ? 'none' : 'block';
-        }
-        function handleFormSubmit(e) {
-            e.preventDefault();
-            alert('Contact details submitted!');
-            closeModal();
-        }
-
-        // Auto-open modal on page load/refresh
-        window.addEventListener('DOMContentLoaded', () => {
-            openModal();
-        });
-    </script>
-</body>
-</html>
+                    <label class
