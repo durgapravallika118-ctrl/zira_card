@@ -11,12 +11,10 @@
         
         .card-wrapper { background: #ffffff; max-width: 440px; width: 100%; min-height: 100vh; position: relative; box-shadow: 0 0 25px rgba(0,0,0,0.5); overflow: hidden; padding-bottom: 20px; }
 
-        /* Header Banner - Clean Light Theme */
+        /* Header Banner */
         .header-banner { background: #ffffff; padding: 20px 15px 20px; text-align: center; color: #111111; position: relative; border-bottom: 1px solid #eef0f2; }
-        
         .logo-container { width: 100%; max-width: 100%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; }
         .logo-container img { width: 90%; max-width: 400px; height: auto; object-fit: contain; display: block; margin: 0 auto; }
-        
         .tagline-pill { display: inline-block; border: 1px solid rgba(200, 141, 118, 0.4); padding: 5px 16px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #c88d76; background: #faf5f3; }
 
         /* Social Bar */
@@ -193,56 +191,49 @@
     </div>
 
     <script>
-        // Helper to convert Google Drive File IDs into direct display URLs
-        function getDriveUrl(id) {
+        // Safe Helper function for Google Drive IDs (extracts ID or returns image fallback)
+        function getDriveUrl(input) {
+            if (!input || input.includes("YOUR_FILE_ID")) return "https://via.placeholder.com/400x300?text=Image+Not+Found";
+            
+            let id = input;
+            if (input.includes("/d/")) {
+                id = input.split("/d/")[1].split("/")[0];
+            } else if (input.includes("id=")) {
+                id = input.split("id=")[1].split("&")[0];
+            }
+            
             return `https://drive.google.com/thumbnail?id=${id}&sz=w1000`;
         }
 
-        // Add your Google Drive File IDs inside getDriveUrl("...")
-       const galleryData = [
-    {
-        title: "Fabric Lights",
-        images: [
-            { name: "Branc", src: "branc.png" },
-            { name: "Circa", src: "circa.png" },
-            { name: "Comma", src: "comma.png" },
-            { name: "Dancer", src: "dancer.png" },
-            { name: "Defa", src: "defa.png" },
-            { name: "Droop", src: "droop.png" },
-            { name: "Earthen", src: "earthen.png" },
-            { name: "Elan", src: "elan.png" },
-            { name: "Flow", src: "flow.png" },
-            { name: "Forma", src: "forma.png" },
-            { name: "Illume", src: "illume.png" },
-            { name: "Itaglow", src: "itaglow.png" },
-            { name: "Kins", src: "kins.png" },
-            { name: "Lance", src: "lance.png" }
-        ]
-    },
+        // Gallery Data using uploaded GitHub root images
+        const galleryData = [
             {
-                title: "Wooden Lights",
+                title: "Fabric Lights",
                 images: [
-                    { name: "Wooden Light 1", src: getDriveUrl("YOUR_FILE_ID_WOODEN_1") },
-                    { name: "Wooden Light 2", src: getDriveUrl("YOUR_FILE_ID_WOODEN_2") },
-                    { name: "Wooden Light 3", src: getDriveUrl("YOUR_FILE_ID_WOODEN_3") }
-                ]
-            },
-            {
-                title: "Bamboo Cane Lights",
-                images: [
-                    { name: "Bamboo Cane Light 1", src: getDriveUrl("YOUR_FILE_ID_BAMBOO_1") },
-                    { name: "Bamboo Cane Light 2", src: getDriveUrl("YOUR_FILE_ID_BAMBOO_2") },
-                    { name: "Bamboo Cane Light 3", src: getDriveUrl("YOUR_FILE_ID_BAMBOO_3") }
-                ]
-            },
-            {
-                title: "Profile Lights",
-                images: [
-                    { name: "Profile Light 1", src: getDriveUrl("YOUR_FILE_ID_PROFILE_1") },
-                    { name: "Profile Light 2", src: getDriveUrl("YOUR_FILE_ID_PROFILE_2") },
-                    { name: "Profile Light 3", src: getDriveUrl("YOUR_FILE_ID_PROFILE_3") }
+                    { name: "Branc", src: "branc.png" },
+                    { name: "Circa", src: "circa.png" },
+                    { name: "Comma", src: "comma.png" },
+                    { name: "Dancer", src: "dancer.png" },
+                    { name: "Defa", src: "defa.png" },
+                    { name: "Droop", src: "droop.png" },
+                    { name: "Earthen", src: "earthen.png" },
+                    { name: "Elan", src: "elan.png" },
+                    { name: "Flow", src: "flow.png" },
+                    { name: "Forma", src: "forma.png" },
+                    { name: "Illume", src: "illume.png" },
+                    { name: "Itaglow", src: "itaglow.png" },
+                    { name: "Kins", src: "kins.png" },
+                    { name: "Lance", src: "lance.png" }
                 ]
             }
+            /* To add more categories later, uncomment and replace with valid image names/IDs:
+            ,{
+                title: "Wooden Lights",
+                images: [
+                    { name: "Wooden Light 1", src: "wooden1.png" }
+                ]
+            }
+            */
         ];
 
         const activeIndices = {};
@@ -255,4 +246,77 @@
                 activeIndices[gIdx] = 0;
                 
                 const sectionDiv = document.createElement('div');
-                sectionDiv
+                sectionDiv.className = 'accordion-section';
+                
+                let thumbsHtml = '';
+                let dotsHtml = '';
+                
+                section.images.forEach((img, iIdx) => {
+                    thumbsHtml += `<div class="thumb-item ${iIdx === 0 ? 'active' : ''}" onclick="setSlide(${gIdx}, ${iIdx})"><img src="${img.src}" alt="${img.name}"></div>`;
+                    dotsHtml += `<div class="dot ${iIdx === 0 ? 'active' : ''}"></div>`;
+                });
+
+                sectionDiv.innerHTML = `
+                    <div class="accordion-header active" onclick="toggleAccordion('g-sec-${gIdx}', this)">
+                        <span>${section.title}</span>
+                        <i class="fas fa-caret-down"></i>
+                    </div>
+                    <div id="g-sec-${gIdx}" class="gallery-container">
+                        <div class="main-viewer">
+                            <div class="product-label" id="label-${gIdx}">${section.images[0].name}</div>
+                            <button class="arrow-nav left" onclick="changeSlide(${gIdx}, -1)"><i class="fas fa-chevron-left"></i></button>
+                            <img id="mainImg-${gIdx}" src="${section.images[0].src}" alt="${section.images[0].name}">
+                            <button class="arrow-nav right" onclick="changeSlide(${gIdx}, 1)"><i class="fas fa-chevron-right"></i></button>
+                            <div class="dots-indicator" id="dots-${gIdx}">${dotsHtml}</div>
+                        </div>
+                        <div class="thumb-strip" id="thumbs-${gIdx}">${thumbsHtml}</div>
+                    </div>
+                `;
+                root.appendChild(sectionDiv);
+            });
+        }
+
+        function setSlide(gIdx, iIdx) {
+            activeIndices[gIdx] = iIdx;
+            const item = galleryData[gIdx].images[iIdx];
+            document.getElementById(`mainImg-${gIdx}`).src = item.src;
+            document.getElementById(`label-${gIdx}`).innerText = item.name;
+
+            const thumbs = document.querySelectorAll(`#thumbs-${gIdx} .thumb-item`);
+            thumbs.forEach((t, i) => t.classList.toggle('active', i === iIdx));
+
+            const dots = document.querySelectorAll(`#dots-${gIdx} .dot`);
+            dots.forEach((d, i) => d.classList.toggle('active', i === iIdx));
+        }
+
+        function changeSlide(gIdx, dir) {
+            let total = galleryData[gIdx].images.length;
+            let next = activeIndices[gIdx] + dir;
+            if (next < 0) next = total - 1;
+            if (next >= total) next = 0;
+            setSlide(gIdx, next);
+        }
+
+        function toggleAccordion(id, headerEl) {
+            const el = document.getElementById(id);
+            const isVisible = el.style.display !== 'none';
+            el.style.display = isVisible ? 'none' : 'block';
+            headerEl.classList.toggle('active', !isVisible);
+        }
+
+        renderGalleries();
+
+        function openModal() { document.getElementById('contactModal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('contactModal').style.display = 'none'; }
+        function toggleNote() {
+            const area = document.getElementById('noteArea');
+            area.style.display = area.style.display === 'block' ? 'none' : 'block';
+        }
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            alert('Contact details submitted!');
+            closeModal();
+        }
+    </script>
+</body>
+</html>
