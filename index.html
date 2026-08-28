@@ -177,4 +177,71 @@
                 </div>
 
                 <div class="form-group">
-                    <label class
+                    <label class="form-label">Email <small>(optional)</small></label>
+                    <input type="email" class="form-input" placeholder="you@example.com">
+                </div>
+
+                <button type="button" class="btn-note" onclick="toggleNote()"><i class="far fa-file-alt"></i> Add a note</button>
+                <div class="note-textarea" id="noteArea">
+                    <textarea class="form-input" rows="3" placeholder="Write your message or request..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn-continue">Continue</button>
+                <button type="button" class="btn-notnow" onclick="closeModal()">Not now</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Helper to convert Google Drive File IDs into direct display URLs
+        function getDriveUrl(id) {
+            return `https://drive.google.com/thumbnail?id=${id}&sz=w1000`;
+        }
+
+        // Add your Google Drive File IDs inside getDriveUrl("...")
+        const galleryData = [
+            {
+                title: "Fabric Lights",
+                images: [
+                    { name: "Fabric Light 1", src: getDriveUrl("https://drive.google.com/file/d/11lUn2oChI2qfCMtR8fxcZR4uODLQLAhR/view?usp=sharing") },
+                    { name: "Fabric Light 2", src: getDriveUrl("YOUR_FILE_ID_FABRIC_2") },
+                    { name: "Fabric Light 3", src: getDriveUrl("YOUR_FILE_ID_FABRIC_3") }
+                ]
+            },
+            {
+                title: "Wooden Lights",
+                images: [
+                    { name: "Wooden Light 1", src: getDriveUrl("YOUR_FILE_ID_WOODEN_1") },
+                    { name: "Wooden Light 2", src: getDriveUrl("YOUR_FILE_ID_WOODEN_2") },
+                    { name: "Wooden Light 3", src: getDriveUrl("YOUR_FILE_ID_WOODEN_3") }
+                ]
+            },
+            {
+                title: "Bamboo Cane Lights",
+                images: [
+                    { name: "Bamboo Cane Light 1", src: getDriveUrl("YOUR_FILE_ID_BAMBOO_1") },
+                    { name: "Bamboo Cane Light 2", src: getDriveUrl("YOUR_FILE_ID_BAMBOO_2") },
+                    { name: "Bamboo Cane Light 3", src: getDriveUrl("YOUR_FILE_ID_BAMBOO_3") }
+                ]
+            },
+            {
+                title: "Profile Lights",
+                images: [
+                    { name: "Profile Light 1", src: getDriveUrl("YOUR_FILE_ID_PROFILE_1") },
+                    { name: "Profile Light 2", src: getDriveUrl("YOUR_FILE_ID_PROFILE_2") },
+                    { name: "Profile Light 3", src: getDriveUrl("YOUR_FILE_ID_PROFILE_3") }
+                ]
+            }
+        ];
+
+        const activeIndices = {};
+
+        function renderGalleries() {
+            const root = document.getElementById('galleries-root');
+            root.innerHTML = '';
+
+            galleryData.forEach((section, gIdx) => {
+                activeIndices[gIdx] = 0;
+                
+                const sectionDiv = document.createElement('div');
+                sectionDiv
