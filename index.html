@@ -4,21 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zira Lights - Digital Card</title>
-    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         body { background-color: #0f1115; color: #333333; display: flex; justify-content: center; min-height: 100vh; padding: 0; }
         
         .card-wrapper { background: #ffffff; max-width: 440px; width: 100%; min-height: 100vh; position: relative; box-shadow: 0 0 25px rgba(0,0,0,0.5); overflow: hidden; padding-bottom: 20px; }
 
-        /* Header Banner - Clean Light Theme */
-        .header-banner { background: #ffffff; padding: 20px 15px 20px; text-align: center; color: #111111; position: relative; border-bottom: 1px solid #eef0f2; }
+        /* Header Banner - Custom Typography Logo */
+        .header-banner { background: #ffffff; padding: 40px 20px 25px; text-align: center; color: #111111; position: relative; border-bottom: 1px solid #eef0f2; }
         
-        /* Updated: Full width logo container with direct scaling */
-        .logo-container { width: 100%; max-width: 100%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; }
-        .logo-container img { width: 90%; max-width: 400px; height: auto; object-fit: contain; display: block; margin: 0 auto; }
+        .text-logo-wrapper { display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 18px; }
+        .logo-main-text { font-family: 'Cinzel', serif; font-size: 38px; font-weight: 700; letter-spacing: 12px; color: #111827; text-transform: uppercase; margin-right: -12px; line-height: 1; }
         
+        .logo-sub-row { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+        .logo-dash { width: 18px; height: 1.5px; background-color: #c88d76; }
+        .logo-sub-text { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 400; letter-spacing: 9px; color: #c88d76; text-transform: uppercase; margin-right: -9px; }
+
         .tagline-pill { display: inline-block; border: 1px solid rgba(200, 141, 118, 0.4); padding: 5px 16px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #c88d76; background: #faf5f3; }
 
         /* Social Bar */
@@ -102,22 +108,24 @@
 <body>
 
     <div class="card-wrapper">
-        <!-- Header Banner -->
         <div class="header-banner">
-            <div class="logo-container">
-                <img src="WhatsApp Image 2026-08-27 at 12.22.26 PM.jpeg" alt="Zira Lights Logo">
+            <div class="text-logo-wrapper">
+                <div class="logo-main-text">ZIRA</div>
+                <div class="logo-sub-row">
+                    <div class="logo-dash"></div>
+                    <div class="logo-sub-text">LIGHTS</div>
+                    <div class="logo-dash"></div>
+                </div>
             </div>
             <div class="tagline-pill">Handcrafted | Customisable</div>
         </div>
 
-        <!-- Social Bar -->
         <div class="social-bar">
             <a href="https://wa.me/919945625101" class="social-btn wa"><i class="fab fa-whatsapp"></i></a>
             <a href="https://share.google/yqGMPEw3OthX3fW0I" class="social-btn insta" target="_blank"><i class="fab fa-instagram"></i></a>
             <a href="https://maps.google.com/?q=Devatha+Plaza,+Residency+Rd,+opp.+to+Bishop+Cotton+Boys+School,+Shanthala+Nagar,+Ashok+Nagar,+Bengaluru,+Karnataka+560025" class="social-btn map" target="_blank"><i class="fas fa-location-dot"></i></a>
         </div>
 
-        <!-- Action Buttons -->
         <div class="action-area">
             <button class="btn-main btn-orange" onclick="openModal()">Exchange Contact</button>
             <div class="btn-row">
@@ -126,10 +134,8 @@
             </div>
         </div>
 
-        <!-- Dynamic Galleries -->
         <div id="galleries-root"></div>
 
-        <!-- About Us Section -->
         <div class="about-us-section">
             <h3 class="section-title">About Us</h3>
             <p class="about-text">
@@ -137,14 +143,12 @@
             </p>
         </div>
 
-        <!-- Inquires Button Section -->
         <div class="inquires-btn-container">
             <a href="https://wa.me/919945625101" class="btn-inquire">
                 <i class="far fa-comment-dots"></i> Inquires
             </a>
         </div>
 
-        <!-- Contact Footer -->
         <div class="contact-details">
             <div class="contact-item">
                 <i class="fas fa-phone-alt"></i>
@@ -161,7 +165,6 @@
         </div>
     </div>
 
-    <!-- Contact Exchange Modal -->
     <div class="modal-overlay" id="contactModal">
         <div class="modal-card">
             <div class="modal-handle"></div>
@@ -312,30 +315,4 @@
         }
 
         function toggleAccordion(id, headerEl) {
-            const el = document.getElementById(id);
-            const isVisible = el.style.display !== 'none';
-            el.style.display = isVisible ? 'none' : 'block';
-            headerEl.classList.toggle('active', !isVisible);
-        }
-
-        renderGalleries();
-
-        function openModal() { document.getElementById('contactModal').style.display = 'flex'; }
-        function closeModal() { document.getElementById('contactModal').style.display = 'none'; }
-        function toggleNote() {
-            const area = document.getElementById('noteArea');
-            area.style.display = area.style.display === 'block' ? 'none' : 'block';
-        }
-        function handleFormSubmit(e) {
-            e.preventDefault();
-            alert('Contact details submitted!');
-            closeModal();
-        }
-
-        // Auto-open modal on page load/refresh
-        window.addEventListener('DOMContentLoaded', () => {
-            openModal();
-        });
-    </script>
-</body>
-</html>
+            const el
