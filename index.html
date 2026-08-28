@@ -191,21 +191,6 @@
     </div>
 
     <script>
-        // Safe Helper function for Google Drive IDs (extracts ID or returns image fallback)
-        function getDriveUrl(input) {
-            if (!input || input.includes("YOUR_FILE_ID")) return "https://via.placeholder.com/400x300?text=Image+Not+Found";
-            
-            let id = input;
-            if (input.includes("/d/")) {
-                id = input.split("/d/")[1].split("/")[0];
-            } else if (input.includes("id=")) {
-                id = input.split("id=")[1].split("&")[0];
-            }
-            
-            return `https://drive.google.com/thumbnail?id=${id}&sz=w1000`;
-        }
-
-        // Gallery Data using uploaded GitHub root images
         const galleryData = [
             {
                 title: "Fabric Lights",
@@ -225,15 +210,26 @@
                     { name: "Kins", src: "kins.png" },
                     { name: "Lance", src: "lance.png" }
                 ]
-            }
-            /* To add more categories later, uncomment and replace with valid image names/IDs:
-            ,{
+            },
+            {
                 title: "Wooden Lights",
                 images: [
-                    { name: "Wooden Light 1", src: "wooden1.png" }
+                    { name: "Drits", src: "drits.png" },
+                    { name: "Hute", src: "hute.png" },
+                    { name: "Vite", src: "vite.png" },
+                    { name: "Levs", src: "levs.png" },
+                    { name: "Stag", src: "stag.png" },
+                    { name: "Asem", src: "asem.png" },
+                    { name: "Stream", src: "stream.png" },
+                    { name: "Orer", src: "orer.png" },
+                    { name: "Cete", src: "cete.png" },
+                    { name: "Merts", src: "merts.png" },
+                    { name: "Usal", src: "usal.png" },
+                    { name: "Oles", src: "oles.png" },
+                    { name: "Rege", src: "rege.png" },
+                    { name: "Ester", src: "ester.png" }
                 ]
             }
-            */
         ];
 
         const activeIndices = {};
